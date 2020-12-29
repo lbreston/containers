@@ -6,10 +6,10 @@ for i=2:2:numel(varargin)
 
 gtype=varargin{i-1};
 pkg=metaclass(out).ContainingPackage.Name;
-pkgcf=str2func(strcat('@',pkg,'.','Container'));
 
-if isempty(gtype)
-    cf=pkgcf;
+
+if isempty(pkg)
+    cf=str2func(strcat('@',gtype));
 else
     cf=str2func(strcat('@',pkg,'.',gtype));
 end
@@ -21,12 +21,12 @@ if all(B)
         odx=setdiff(1:numel(out.dimNames),I,'stable');
         sdtemp=num2cell(out.data,I);
         sdtemp=cellfun(@(x)cf(x,out.dimNames(idx),out.dimVals(idx)),sdtemp);
-        out=pkgcf(sdtemp,out.dimNames(odx),out.dimVals(odx));
+        out=cf(sdtemp,out.dimNames(odx),out.dimVals(odx));
     else
         out=cf(out);
     end
     
-elseif isa(out.data,'metacontainer.Container')
+elseif isa(out.data,'Container')
     out=arrayfun(@(x)group(x,varargin{i-1:i}),out.data);
     cf=str2func(strcat('@',class(out)));
     out=cf(out,out.dimNames,out.dimVals);

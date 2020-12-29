@@ -1,5 +1,7 @@
+%Containers are arrays with labeled dimensions and coordinates 
+%Data is indexed using dimension name, value pairs. 
 
-classdef Container < matlab.mixin.CustomDisplay
+classdef Container 
     
     properties
         data
@@ -32,9 +34,7 @@ classdef Container < matlab.mixin.CustomDisplay
         out = group(obj,varargin)
         
         out = split(obj,varargin)
-        
-        %out = eq(obj,varargin)
-        
+
         out = find(obj,idx)
         
         out = getdimvals(obj,dname)

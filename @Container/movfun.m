@@ -1,7 +1,12 @@
-function out = movfun(fcn,dname,k,o,varargin)
+function out = movfun(fcn,mtype,dname,k,o,varargin)
 
 pkg=metaclass(varargin{1}).ContainingPackage.Name;
-pkgcf=str2func(strcat('@',pkg,'.','Container'));
+
+if isempty(pkg)
+    cf=str2func(strcat('@',mtype));
+else
+    cf=str2func(strcat('@',pkg,'.',mtype));
+end
 
 dv=getdimvals(varargin{1},dname);
 mn=min(dv);
@@ -14,5 +19,5 @@ for i=0:n-1
     dtemp(n-i)=fcn(intemp{:});
 end
 
-out=pkgcf(dtemp,{dname},{pts});
+out=cf(dtemp,dname,{pts});
 end

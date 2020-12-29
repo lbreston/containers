@@ -1,4 +1,4 @@
-function makecontainerclass(pkgname)
+function makecontainerclass(pkgname,cname)
 
 list = dir();
 parts = strsplit(list(1).folder, '/');
@@ -7,10 +7,10 @@ if ~strcmp(parts{end},strcat('+',pkgname))
     cd(strcat('+',pkgname))
 end
 
-if ~exist('@Container', 'dir')
-    mkdir('@Container')
-    fid = fopen('@Container/Container.m','w');
-    fprintf(fid,'%s\n','classdef Container < metacontainer.Container');
+if ~exist(cname, 'dir')
+    mkdir(strcat('@',cname))
+    fid = fopen(strcat('@',cname,'/',cname,'.m'),'w');
+    fprintf(fid,'%s\n',strcat("classdef"," ", string(cname)," < Container"));
     fprintf(fid,'%s\n','end');
     fclose(fid);
 end
@@ -20,7 +20,7 @@ for i=1:length(list)
     fname=list(i).name;
     if ~strcmp(fname,'plot_.m')
         fname=regexprep(fname,'(_)','');
-        fname=strcat("@Container/",fname);
+        fname=strcat('@',cname,'/',fname);
         fid = fopen(strcat(list(i).folder,'/',list(i).name));
         text = textscan(fid,'%s',1,'delimiter','\n');
         fclose(fid);
@@ -29,7 +29,7 @@ for i=1:length(list)
         S2=regexprep(text{:}{:},'.*(=)\s*','');
         S2=regexprep(S2,'varargin','varargin{:}');
         S2=regexprep(S2,'obj','x');
-        S2=compose('out = %s.Container.containerfun(@(x)%s,obj);',pkgname,S2);
+        S2=compose('out = %s.%s.containerfun(@(x)%s,obj);',pkgname,cname,S2);
         %
         fid = fopen(fname,'w');
         fprintf(fid,'%s\n',S1);

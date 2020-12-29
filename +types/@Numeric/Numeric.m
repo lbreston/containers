@@ -1,4 +1,4 @@
-classdef Numeric < types.Container
+classdef Numeric < types.AnalysisTypes
     
     properties
         error=[]

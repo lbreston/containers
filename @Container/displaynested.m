@@ -1,3 +1,4 @@
+%Displays properties of nested containers 
 
 function displaynested(C)
 whosout = whos('C');
@@ -5,7 +6,7 @@ sizes = whosout.size;
 sizestr = [int2str(sizes(1)),'x',int2str(sizes(2))];
 endstr = [': [' sizestr '] ' whosout.class];
 disp([inputname(1) endstr]);
-if isa(C,'metacontainer.Container')
+if isa(C,'Container')
     recursor(C,0,'');
 end
 disp(' ');
@@ -41,7 +42,7 @@ for i = 1:length(fnames)
     end
     disp(str);
     
-    if isa(tmpstruct,'metacontainer.Container')
+    if isa(tmpstruct,'Container')
         if isconsistent(tmpstruct)
             recursor(tmpstruct,level+1,recstr);
         end

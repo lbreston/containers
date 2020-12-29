@@ -1,0 +1,2 @@
+classdef AnalysisTypes < Container
+end

@@ -1,3 +1,5 @@
+%Returns cell array of indicies of all non-zero, non-container elements. 
+
 function idx=find(obj,ind)
 idx={};
 
@@ -11,7 +13,7 @@ if nargin<2
     ind=[];
 end
 
-if ~isa(obj.data,'metacontainer.Container')
+if ~isa(obj.data,'Container')
         K=find(obj.data);
         for i=1:numel(K)
             indtmp=makeinds(obj,ind,K(i));

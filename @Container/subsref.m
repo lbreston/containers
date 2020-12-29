@@ -109,7 +109,7 @@ sdata=obj.data(idx{:});
 argCell=namedargs2cell(argStruct);
 
 if ~isempty(argCell)
-    if isa(sdata,'metacontainer.Container')
+    if isa(sdata,'Container')
         sdata=arrayfun(@(x)subfcn(x,argCell{:}),sdata);
     else
         sdata=cf();

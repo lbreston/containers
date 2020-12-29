@@ -1,4 +1,4 @@
-classdef Logical < types.Container
+classdef Logical < types.AnalysisTypes
     
     methods
         
