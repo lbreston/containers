@@ -4,9 +4,9 @@ classdef Distribution < types.Numeric
         
         out=mean_(obj)
         
-        out=std_(obj,dim) 
+        out=std_(obj) 
         
-        out=sem_(obj,dim)
+        out=sem_(obj)
          
 %         confidence
 %         

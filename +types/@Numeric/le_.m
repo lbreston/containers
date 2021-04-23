@@ -1,5 +1,5 @@
 function out = le_(obj,B)
-if isa(B, 'metacontainer.Container')
+if isa(B, 'Container')
    dtemp=(obj.data<=B.data);
    out=types.Logical(dtemp,obj.dimNames,obj.dimVals);
 else

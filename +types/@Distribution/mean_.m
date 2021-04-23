@@ -1,6 +1,6 @@
 function out = mean_(obj)
 sdata=arrayfun(@(x)x,obj.data,'UniformOutput',false);
-out=metacontainer.Container.containerfun(@(varargin)fcn(varargin{:}),sdata{:});
+out=Container.containerfun(@(varargin)fcn(varargin{:}),sdata{:});
 end
 
 function out=fcn(varargin)
